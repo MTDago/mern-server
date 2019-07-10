@@ -1,12 +1,11 @@
-const express = require('express')
-const port = 3000
+const express = require('express');
+const app = express();
+const port = 3000;
 
-const app = express()
+app.get('/', (req, res) => {
+    res.send(JSON.stringify({ Hello: 'World' }));
+});
 
-app.get('/', (req, res) = () => {
-    res.send(JSON.stringify({ Hello: 'World'}))
-})
-
-app.listen(port => {
-    console.log(`Server listening to localhost:${port}`)
-})
+app.listen(port, () => {
+    console.log(`Server listening to localhost: ${port}`);
+});
