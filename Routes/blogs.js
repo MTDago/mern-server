@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
         );
 });
 
-// POST /book
+// POST /blog
 router.post('/', (req, res) => {
     const { title, content, date } = req.body;
     console.log('POST to /blogs');
@@ -24,6 +24,18 @@ router.post('/', (req, res) => {
         date
     })
         .then(blog => res.send(blog))
+        .catch(error =>
+            res.status(500).send({
+                error: error.message
+            })
+        );
+});
+
+// DELETE /blog
+router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+    Blog.findByIdAndRemove(id)
+        .then(() => res.send(200))
         .catch(error =>
             res.status(500).send({
                 error: error.message

@@ -16,14 +16,28 @@ router.get('/', (req, res) => {
 
 // POST /book
 router.post('/', (req, res) => {
-    const { title, content, date } = req.body;
+    const { title, cost, blurb, published, series } = req.body;
     console.log('POST to /books');
     Book.create({
         title,
-        content,
-        date
+        cost,
+        blurb,
+        published,
+        series
     })
         .then(book => res.send(book))
+        .catch(error =>
+            res.status(500).send({
+                error: error.message
+            })
+        );
+});
+
+// DELETE /book
+router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+    Book.findByIdAndRemove(id)
+        .then(() => res.send(200))
         .catch(error =>
             res.status(500).send({
                 error: error.message
