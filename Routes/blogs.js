@@ -1,12 +1,12 @@
 const express = require('express');
-const Book = require('../Models/book');
+const Blog = require('../Models/blog');
 
 const router = express.Router();
 
-// GET /book
+// GET /blog
 router.get('/', (req, res) => {
-    Book.find()
-        .then(book => res.send(book))
+    Blog.find()
+        .then(blog => res.send(blog))
         .catch(error =>
             res.status(500).send({
                 error: error.message
@@ -17,13 +17,13 @@ router.get('/', (req, res) => {
 // POST /book
 router.post('/', (req, res) => {
     const { title, content, date } = req.body;
-    console.log('POST to /books');
-    Book.create({
+    console.log('POST to /blogs');
+    Blog.create({
         title,
         content,
         date
     })
-        .then(book => res.send(book))
+        .then(blog => res.send(blog))
         .catch(error =>
             res.status(500).send({
                 error: error.message
