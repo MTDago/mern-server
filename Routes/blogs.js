@@ -16,11 +16,12 @@ router.get('/', (req, res) => {
 
 // POST /blog
 router.post('/', (req, res) => {
-    const { title, content, date } = req.body;
+    const { title, content, tags, date } = req.body;
     console.log('POST to /blogs');
     Blog.create({
         title,
         content,
+        tags,
         date
     })
         .then(blog => res.send(blog))
