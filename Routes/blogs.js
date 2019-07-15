@@ -57,4 +57,15 @@ router.put('/:id', (req, res) => {
         );
 });
 
+// GET /blog/:id
+router.get('/:id', (req, res) => {
+    const id = req.params.id;
+    Blog.findOne({ _id: id })
+        .then(blog => res.send(blog))
+        .catch(error =>
+            res.status(500).send({
+                error: error.message
+            })
+        );
+});
 module.exports = router;

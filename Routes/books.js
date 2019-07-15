@@ -58,4 +58,16 @@ router.put('/:id', (req, res) => {
         );
 });
 
+// GET /book/:id
+router.get('/:id', (req, res) => {
+    const id = req.params.id;
+    Book.findOne({ _id: id })
+        .then(book => res.send(book))
+        .catch(error =>
+            res.status(500).send({
+                error: error.message
+            })
+        );
+});
+
 module.exports = router;
