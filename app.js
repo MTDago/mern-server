@@ -39,7 +39,7 @@ passport.use(new LocalStrategy(
     }
   )) 
 
-//Database Connection
+// Database Connection
 mongoose.connect(process.env.DB_PATH, { useNewUrlParser: true }, err => {
     if (err) {
         console.log('Error connecting to database', err) 
@@ -55,7 +55,7 @@ app.use('/mailinglist', require('./Routes/mailingList'))
 app.use('/books', secure, require('./Routes/books')) 
 app.use('/blogs', require('./Routes/blogs')) 
 
-//Start the server!
+// Start the server!
 app.listen(port, () => {
     console.log(`Server listening to localhost: ${port}`) 
 }) 

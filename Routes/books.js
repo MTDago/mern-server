@@ -45,4 +45,29 @@ router.delete('/:id', (req, res) => {
         );
 });
 
+// UPDATE /book
+router.put('/:id', (req, res) => {
+    const id = req.params.id;
+    const { title, cost, blurb, published, series } = req.body;
+    Book.findOneAndUpdate(id, req.body)
+        .then(() => res.send(200))
+        .catch(error =>
+            res.status(500).send({
+                error: error.message
+            })
+        );
+});
+
+// GET /book/:id
+router.get('/:id', (req, res) => {
+    const id = req.params.id;
+    Book.findOne({ _id: id })
+        .then(book => res.send(book))
+        .catch(error =>
+            res.status(500).send({
+                error: error.message
+            })
+        );
+});
+
 module.exports = router;
