@@ -54,6 +54,8 @@ app.get('/', (req, res) => {
 app.use('/mailinglist', require('./Routes/mailingList')) 
 app.use('/books', secure, require('./Routes/books')) 
 app.use('/blogs', require('./Routes/blogs')) 
+// app.use('/payments', require('./Routes/payments')) 
+app.use('/upload', require('./Routes/imageUpload')) 
 
 // Start the server!
 app.listen(port, () => {
