@@ -49,7 +49,7 @@ router.delete('/:id', (req, res) => {
 router.put('/:id', (req, res) => {
     const id = req.params.id;
     const { title, cost, blurb, published, series } = req.body;
-    Book.findOneAndUpdate(id, req.body)
+    Book.findOneAndUpdate({ _id: id }, req.body)
         .then(() => res.send(200))
         .catch(error =>
             res.status(500).send({
