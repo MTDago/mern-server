@@ -8,6 +8,7 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const session = require('express-session');
 const LocalStrategy = require('passport-local').Strategy;
 const secure = require('./middleware/secure');
+const Client = require('./Models/Client')
 
 require('dotenv').config();
 
@@ -61,6 +62,18 @@ app.get('/', (req, res) => {
 app.use('/mailinglist', require('./Routes/mailingList'));
 app.use('/books', require('./Routes/books'));
 app.use('/blogs', require('./Routes/blogs'));
+app.post('/api/register', function(req, res) {
+    const { email, password } = req.body;
+    const user = new User({ email, password });
+    user.save(function(err) {
+      if (err) {
+        res.status(500)
+          .send("Error registering new user please try again.");
+      } else {
+        res.status(200).send("Welcome to the club!");
+      }
+    });
+  });
 
 // Start the server!
 app.listen(port, () => {
