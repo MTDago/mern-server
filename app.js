@@ -60,7 +60,7 @@ app.get('/', (req, res) => {
     res.send(JSON.stringify({ Hello: 'World' }));
 });
 app.use('/mailinglist', require('./Routes/mailingList'));
-app.use('/books', require('./Routes/books'));
+app.use('/books', secure, require('./Routes/books'));
 app.use('/blogs', require('./Routes/blogs'));
 app.post('/api/register', function(req, res) {
     const { email, password } = req.body;
