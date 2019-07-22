@@ -2,12 +2,12 @@ process.env.NODE_ENV = 'test';
 
 let mongoose = require('mongoose');
 let Book = require('../Models/book');
+let server = 'http://localhost:5000';
 
 //Require the dev-dependencies
 let chai = require('chai');
 let chaiHttp = require('chai-http');
 let should = chai.should();
-
 chai.use(chaiHttp);
 //Our parent block
 describe('Books', () => {
@@ -27,7 +27,7 @@ describe('Books', () => {
                 published: Date.now,
                 series: 'lord of the rings'
             };
-            chai.request('http://localhost:5000')
+            chai.request(server)
                 .post('/books')
                 .send(book)
                 .end((err, res) => {
@@ -40,7 +40,7 @@ describe('Books', () => {
 
     describe('/GET book', () => {
         it('it should GET all the books', done => {
-            chai.request('http://localhost:5000')
+            chai.request(server)
                 .get('/books/')
                 .end((err, res) => {
                     res.should.have.status(200);
@@ -51,28 +51,44 @@ describe('Books', () => {
         });
     });
 
-    describe('/GET book', () => {
-        it('it should GET a singular book the books', done => {
-            let id = '5d355523f71dab8073f50c29';
-            chai.request('http://localhost:5000')
-                .get(`/books/${id}`)
+    /*
+     * Test the /GET/:id route
+     */
+    describe('/GET/:id book', () => {
+        it('it should GET a book by the given id', done => {
+            let book = {
+                title: 'The Lord of the Rings',
+                cost: 25,
+                blurb: 'Frodo and sum stuff',
+                published: Date.now,
+                series: 'lord of the rings'
+            };
+            chai.request(server)
+                .get('/book/' + book.id)
+                .send(book)
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
+                    res.body.should.have.property('title');
+                    res.body.should.have.property('cost');
+                    res.body.should.have.property('blurb');
+                    res.body.should.have.property('published');
+                    res.body.should.have.property('_id').eql(book.id);
                     done();
                 });
         });
     });
-
-    // describe('/DELETE book', () => {
-    //     it('it should DELETE a book', done => {
-    //         chai.request('http://localhost:5000')
-    //             .delete(`/books/${bookID}`)
-    //             .end((err, res) => {
-    //                 res.should.have.status(200);
-    //                 res.body.length.should.be.eql(0);
-    //                 done();
-    //             });
-    //     });
-    // });
 });
+
+// describe('/DELETE book', () => {
+//     it('it should DELETE a book', done => {
+//         chai.request('http://localhost:5000')
+//             .delete(`/books/${bookID}`)
+//             .end((err, res) => {
+//                 res.should.have.status(200);
+//                 res.body.length.should.be.eql(0);
+//                 done();
+//             });
+//     });
+// });
+// });
