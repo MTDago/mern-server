@@ -75,7 +75,9 @@ app.use('/books', secure, require('./Routes/books'));
 app.use('/blogs', require('./Routes/blogs'));
 app.post('/api/register', function(req, res) {
     const { email, password } = req.body;
-    const user = new User({ email, password });
+    const user = new User({ email });
+    user.password = user.hashPassword(password)
+    console.log(user)
     user.save(function(err) {
       if (err) {
         res.status(500)
@@ -87,8 +89,9 @@ app.post('/api/register', function(req, res) {
   });
 
   app.post('/api/authenticate', function(req, res) {
-    const { email, password } = req.body;
-    User.findOne({ email }, function(err, user) {
+      const { email, password } = req.body;
+      console.log(req.body)
+    User.findOne({ email: req.body.email }, function(err, user) {
       if (err) {
         console.error(err);
         res.status(500)
