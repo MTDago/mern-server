@@ -50,7 +50,7 @@ passport.use(
 
 // Database Connection
 mongoose.connect(
-    (process.env.NODE_ENV ? process.env.DB_TEST_PATH : process.env.DB_PATH),
+    (process.env.NODE_ENV === 'test' ? process.env.DB_TEST_PATH : process.env.DB_PATH),
     { useNewUrlParser: true },
     err => {
         if (err) {
