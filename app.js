@@ -8,14 +8,11 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const session = require('express-session');
 const LocalStrategy = require('passport-local').Strategy;
 const secure = require('./middleware/secure');
-<<<<<<< HEAD
-=======
 const User = require('./Models/User')
 const secret = 'Hello from secret'
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
 const withAuth = require('./middleware/withAuth')
->>>>>>> ef5ffad0e04313bb7556b301c77ec41961908392
 
 require('dotenv').config();
 
@@ -24,12 +21,8 @@ const app = express();
 const port = process.env.PORT || 5000; //TO DO: Add PORT to .env
 app.use(morgan('dev'));
 app.use(bodyParser.json());
-<<<<<<< HEAD
-app.use('/', cors());
-=======
 app.use('/', cors())
 app.use(cookieParser())
->>>>>>> ef5ffad0e04313bb7556b301c77ec41961908392
 app.use(
     session({
         secret: 'secret',
@@ -56,15 +49,6 @@ passport.use(
 );
 
 // Database Connection
-<<<<<<< HEAD
-mongoose.connect(process.env.DB_PATH, { useNewUrlParser: true }, err => {
-    if (err) {
-        console.log('Error connecting to database', err);
-    } else {
-        console.log('Connected to database!');
-    }
-});
-=======
 mongoose.connect(
     (process.env.NODE_ENV ? process.env.DB_TEST_PATH : process.env.DB_PATH),
     { useNewUrlParser: true },
@@ -76,16 +60,10 @@ mongoose.connect(
         }
     }
 );
->>>>>>> ef5ffad0e04313bb7556b301c77ec41961908392
 //Routes
 app.get('/', (req, res) => {
     res.send(JSON.stringify({ Hello: 'World' }));
 });
-<<<<<<< HEAD
-app.use('/mailinglist', require('./Routes/mailingList'));
-app.use('/books', require('./Routes/books'));
-app.use('/blogs', require('./Routes/blogs'));
-=======
 app.get('/api/secret', withAuth, function(req, res) {
     res.send('The password is potato');
   });
@@ -150,7 +128,6 @@ app.post('/api/register', function(req, res) {
       }
     });
   });
->>>>>>> ef5ffad0e04313bb7556b301c77ec41961908392
 
 // Start the server!
 app.listen(port, () => {
