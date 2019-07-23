@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt-nodejs')
 const schema = mongoose.Schema
 
 const userSchema = new schema({
-    username: {
+    email: {
         type: String,
         required:true
     },
@@ -13,7 +13,7 @@ const userSchema = new schema({
     }
 })
 
-UserSchema.methods.isCorrectPassword = function(password, callback){
+userSchema.methods.isCorrectPassword = function(password, callback){
     bcrypt.compare(password, this.password, function(err, same) {
       if (err) {
         callback(err);
@@ -27,8 +27,8 @@ userSchema.methods.hashPassword = function (password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(10))
 }
 
-userSchema.methods.hashPassword = function (password, hash) {
-    return bcrypt.compareSync(password, hash)
-}
+// userSchema.methods.hashPassword = function (password, hash) {
+//     return bcrypt.compareSync(password, hash)
+// }
 
-module.exports = mongoose.model('user', userSchema, 'user')
+module.exports = mongoose.model('user', userSchema)
