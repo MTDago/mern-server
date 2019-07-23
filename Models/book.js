@@ -6,7 +6,7 @@ const Book = new Schema({
     cost: Number,
     blurb: String,
     published: Date,
-    series: String
+    series: String,
     imageURL: String
 });
 
