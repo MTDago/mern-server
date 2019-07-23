@@ -2,6 +2,7 @@ process.env.NODE_ENV = 'test';
 
 let mongoose = require('mongoose');
 let Blog = require('../Models/blog');
+let server = 'http://localhost:5000';
 
 //Require the dev-dependencies
 let chai = require('chai');
@@ -24,7 +25,7 @@ describe('Blogs', () => {
                 content: 'THis is the content of a blog post',
                 tags: ['tag1', 'tag2', 'tag3']
             };
-            chai.request('http://localhost:5000')
+            chai.request(server)
                 .post('/blogs')
                 .send(blog)
                 .end((err, res) => {
@@ -37,7 +38,7 @@ describe('Blogs', () => {
 
     describe('/GET blog', () => {
         it('it should GET all the blogs', done => {
-            chai.request('http://localhost:5000')
+            chai.request(server)
                 .get('/blogs/')
                 .end((err, res) => {
                     res.should.have.status(200);
@@ -51,7 +52,7 @@ describe('Blogs', () => {
     describe('/GET blog', () => {
         it('it should GET a singular blog the blogs', done => {
             let id = '5d355523f71dab8073f50c29';
-            chai.request('http://localhost:5000')
+            chai.request(server)
                 .get(`/blogs/${id}`)
                 .end((err, res) => {
                     res.should.have.status(200);
@@ -63,7 +64,7 @@ describe('Blogs', () => {
 
     // describe('/DELETE blog', () => {
     //     it('it should DELETE a blog', done => {
-    //         chai.request('http://localhost:5000')
+    //         chai.request(server)
     //             .delete(`/blogs/${blogID}`)
     //             .end((err, res) => {
     //                 res.should.have.status(200);
