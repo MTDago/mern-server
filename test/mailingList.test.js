@@ -2,6 +2,7 @@ process.env.NODE_ENV = 'test';
 
 let mongoose = require('mongoose');
 let Blog = require('../Models/blog');
+let server = 'http://localhost:5000';
 
 //Require the dev-dependencies
 let chai = require('chai');
@@ -24,7 +25,7 @@ describe('Mailing List', () => {
                 lastName: 'Doe',
                 email: 'example@test.com'
             };
-            chai.request('http://localhost:5000')
+            chai.request(server)
                 .post('/mailinglist')
                 .send(info)
                 .end((err, res) => {
@@ -37,7 +38,7 @@ describe('Mailing List', () => {
 
     describe('/get MailingList', () => {
         it('it should get the mailing list from the API', done => {
-            chai.request('http://localhost:5000')
+            chai.request(server)
                 .get('/mailinglist')
                 .end((err, res) => {
                     res.should.have.status(200);
