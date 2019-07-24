@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
 // UPDATE /book
 router.put('/edit', (req, res) => {
     const { reading, writing, WIP, links } = req.body;
-    Desk.findOneAndUpdate({ reading: reading }, req.body)
+    Desk.findAndModify({ reading: reading }, req.body)
         .then(() => res.send(200))
         .catch(error =>
             res.status(500).send({
