@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
 // POST /book
 router.post('/', (req, res) => {
-    const { title, cost, blurb, published, series, imageURL } = req.body;
+    const { title, cost, blurb, published, series, imageURL, ISBN } = req.body;
     console.log('POST to /books');
     Book.create({
         title,
@@ -24,7 +24,8 @@ router.post('/', (req, res) => {
         blurb,
         published,
         series,
-        imageURL
+        imageURL,
+        ISBN
     })
         .then(book => res.send(book))
         .catch(error =>
@@ -49,7 +50,7 @@ router.delete('/:id', (req, res) => {
 // UPDATE /book
 router.put('/:id', (req, res) => {
     const id = req.params.id;
-    const { title, cost, blurb, published, series, imageURL } = req.body;
+    const { title, cost, blurb, published, series, imageURL, ISBN } = req.body;
     Book.findOneAndUpdate({ _id: id }, req.body)
         .then(() => res.send(200))
         .catch(error =>
