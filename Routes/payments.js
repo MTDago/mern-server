@@ -27,6 +27,5 @@ router.post('/', (req, res) => {
     };
     stripe.charges.create(body, stripeChargeCallback(res));
 });
-return app;
 
 module.exports = router;
