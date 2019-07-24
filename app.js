@@ -72,6 +72,7 @@ app.get('/api/secret', withAuth, function(req, res) {
 app.post('/checkToken', withAuth, function(req, res) {
     res.sendStatus(200);
 });
+app.use('/desk', require('./Routes/desk'));
 app.use('/payment', require('./Routes/payments'));
 app.use('/mailinglist', require('./Routes/mailingList'));
 app.use('/books', require('./Routes/books'));
@@ -121,7 +122,7 @@ app.post('/api/authenticate', function(req, res) {
                     const token = jwt.sign(payload, secret, {
                         expiresIn: '1h'
                     });
-                    res.json({ token })
+                    res.json({ token });
                 }
             });
         }
