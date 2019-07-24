@@ -1,6 +1,4 @@
 const express = require('express');
-const payments = require('../Models/payments');
-
 const router = express.Router();
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
