@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -13,8 +15,6 @@ const secret = 'hello from secret';
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const withAuth = require('./middleware/withAuth');
-
-require('dotenv').config();
 
 //App Setup
 const app = express();
