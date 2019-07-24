@@ -9,7 +9,7 @@ const session = require('express-session');
 const LocalStrategy = require('passport-local').Strategy;
 const secure = require('./middleware/secure');
 const User = require('./Models/User');
-const secret = 'Hello from secret';
+const secret = 'hello from secret';
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const withAuth = require('./middleware/withAuth');
@@ -21,7 +21,7 @@ const app = express();
 const port = process.env.PORT || 5000; //TO DO: Add PORT to .env
 app.use(morgan('dev'));
 app.use(bodyParser.json());
-app.use('/', cors());
+app.use(cors());
 app.use(cookieParser());
 app.use(
     session({
@@ -69,7 +69,7 @@ app.get('/', (req, res) => {
 app.get('/api/secret', withAuth, function(req, res) {
     res.send('The password is potato');
 });
-app.get('/checkToken', withAuth, function(req, res) {
+app.post('/checkToken', withAuth, function(req, res) {
     res.sendStatus(200);
 });
 app.use('/payment', require('./Routes/payments'));
@@ -121,9 +121,7 @@ app.post('/api/authenticate', function(req, res) {
                     const token = jwt.sign(payload, secret, {
                         expiresIn: '1h'
                     });
-                    res.cookie('token', token, { httpOnly: true }).sendStatus(
-                        200
-                    );
+                    res.json({ token })
                 }
             });
         }
