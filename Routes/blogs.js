@@ -48,7 +48,7 @@ router.delete('/:id', (req, res) => {
 router.put('/:id', (req, res) => {
     const id = req.params.id;
     const { title, content, tags } = req.body;
-    Blog.findOneAndUpdate(id, req.body)
+    Blog.findOneAndUpdate({ _id: id }, req.body)
         .then(() => res.send(200))
         .catch(error =>
             res.status(500).send({
