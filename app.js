@@ -21,7 +21,7 @@ const app = express();
 const port = process.env.PORT || 5000; //TO DO: Add PORT to .env
 app.use(morgan('dev'));
 app.use(bodyParser.json());
-app.use('/', cors());
+app.use(cors());
 app.use(cookieParser());
 app.use(
     session({
@@ -72,6 +72,7 @@ app.get('/api/secret', withAuth, function(req, res) {
 app.post('/checkToken', withAuth, function(req, res) {
     res.sendStatus(200);
 });
+app.use('/payment', require('./Routes/payments'));
 app.use('/mailinglist', require('./Routes/mailingList'));
 app.use('/books', require('./Routes/books'));
 app.use('/blogs', require('./Routes/blogs'));
