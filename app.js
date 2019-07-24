@@ -21,8 +21,10 @@ const app = express();
 const port = process.env.PORT || 5000; //TO DO: Add PORT to .env
 app.use(morgan('dev'));
 app.use(bodyParser.json());
+
 app.options('*', cors());
-app.use('*', cors());
+app.use('*', cors({ credentials: true, origin: true }));
+
 app.use(cookieParser());
 app.use(
     session({
