@@ -32,11 +32,13 @@ router.post('/', (req, res) => {
         );
 });
 
-// UPDATE /book
+// UPDATE /desk
 router.put('/edit', (req, res) => {
     const { reading, writing, WIP, links } = req.body;
-    Desk.findOneAndUpdate({ reading: reading }, req.body)
-        .then(() => res.send(200))
+    Desk.findOneAndUpdate({}, req.body)
+        .then(() => {
+            res.send(200);
+        })
         .catch(error =>
             res.status(500).send({
                 error: error.message
