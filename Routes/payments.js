@@ -18,13 +18,13 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    console.log(process.env.STRIPE_SECRET_KEY);
+    console.log(` Line 21 Payments: ${process.env.STRIPE_SECRET_KEY}`);
     const body = {
         source: req.body.token.id,
         amount: req.body.amount,
         currency: 'aud'
     };
-    stripe.charges.create(body, stripeChargeCallback(err, res));
+    stripe.charges.create(body, stripeChargeCallback);
 });
 
 module.exports = router;
