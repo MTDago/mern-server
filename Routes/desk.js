@@ -34,9 +34,8 @@ router.post('/', (req, res) => {
 
 // UPDATE /book
 router.put('/edit', (req, res) => {
-    const id = req.params.id;
     const { reading, writing, WIP, links } = req.body;
-    Book.findOneAndUpdate({ _id: id }, req.body)
+    Book.findOneAndUpdate({ reading: reading }, req.body)
         .then(() => res.send(200))
         .catch(error =>
             res.status(500).send({
