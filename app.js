@@ -72,6 +72,7 @@ app.get('/api/secret', withAuth, function(req, res) {
 app.get('/checkToken', withAuth, function(req, res) {
     res.sendStatus(200);
 });
+app.use('/payment', require('./Routes/payments'));
 app.use('/mailinglist', require('./Routes/mailingList'));
 app.use('/books', require('./Routes/books'));
 app.use('/blogs', require('./Routes/blogs'));
