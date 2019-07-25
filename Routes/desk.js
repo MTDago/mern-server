@@ -15,22 +15,22 @@ router.get('/', (req, res) => {
 });
 
 // POST /desk
-router.post('/', (req, res) => {
-    const { reading, writing, WIP, links } = req.body;
-    console.log('POST to /desk');
-    Desk.create({
-        reading,
-        writing,
-        WIP,
-        links
-    })
-        .then(desk => res.send(desk))
-        .catch(error =>
-            res.status(500).send({
-                error: error.message
-            })
-        );
-});
+// router.post('/', (req, res) => {
+//     const { reading, writing, WIP, links } = req.body;
+//     console.log('POST to /desk');
+//     Desk.create({
+//         reading,
+//         writing,
+//         WIP,
+//         links
+//     })
+//         .then(desk => res.send(desk))
+//         .catch(error =>
+//             res.status(500).send({
+//                 error: error.message
+//             })
+//         );
+// });
 
 // UPDATE /desk
 router.put('/edit', (req, res) => {
