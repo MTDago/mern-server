@@ -12,6 +12,9 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     console.log(` Line 21 Payments: ${process.env.STRIPE_SECRET_KEY}`);
+    console.log('====================================');
+    console.log(req.body);
+    console.log('====================================');
     const body = {
         source: req.body.token.id,
         amount: req.body.amount,
