@@ -2,13 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const stripeChargeCallback = (stripeErr, res) => {
-    if (stripeErr) {
-        res.status(500).send({ error: stripeErr });
-    } else {
-        res.status(200).send({ success: res });
-    }
-};
 
 router.get('/', (req, res) => {
     res.send({
@@ -24,7 +17,13 @@ router.post('/', (req, res) => {
         amount: req.body.amount,
         currency: 'aud'
     };
-    stripe.charges.create(body, stripeChargeCallback);
+    stripe.charges.create(body, (stripeErr, stripeCharge) => {
+        if (stripeErr) {
+            res.status(500).send({ error: stripeErr });
+        } else {
+            res.status(200).send({ success: stripeCharge });
+        }
+    });
 });
 
 module.exports = router;
