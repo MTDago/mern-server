@@ -17,7 +17,7 @@ router.post('/', (req, res) => {
     console.log('====================================');
     const body = {
         source: req.body.token,
-        amount: req.body.amount,
+        amount: Math.floor(req.body.amount * 100),
         currency: 'aud'
     };
     stripe.charges.create(body, (stripeErr, stripeCharge) => {
