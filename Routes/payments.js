@@ -16,7 +16,7 @@ router.post('/', (req, res) => {
     console.log(req.body);
     console.log('====================================');
     const body = {
-        source: req.body.token.id,
+        source: req.body.token,
         amount: req.body.amount,
         currency: 'aud'
     };
