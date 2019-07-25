@@ -22,8 +22,8 @@ const port = process.env.PORT || 5000; //TO DO: Add PORT to .env
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 
-app.options('*', cors());
-app.use('*', cors({ credentials: true, origin: true }));
+app.options(cors({ credentials: true, origin: true }));
+app.use(cors({ credentials: true, origin: true }));
 // app.use(function(req, res, next) {
 //     res.header('Access-Control-Allow-Origin', '*');
 //     res.header(
